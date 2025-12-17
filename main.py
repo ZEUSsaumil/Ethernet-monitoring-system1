@@ -1,7 +1,12 @@
 """Passive link monitor for FTP/ethernet traffic (Linux-friendly).
 
-The script samples interface counters, TCP retrans totals, and CRC errors
-without injecting traffic. Useful to watch live while FTP runs.
+How to run on Ubuntu:
+1) Install deps: `sudo apt update && sudo apt install -y python3-pip` then `pip install psutil`.
+2) (Optional) install tools the script reads: `sudo apt install -y iproute2 iputils-ping`.
+3) Run: `python3 main.py --iface eth0 --interval 1 --log /tmp/link.jsonl`
+	- Use `ip -br a` to find the interface name (often eth0/ens33).
+	- You may need sudo to read /sys stats or run `ss -s`.
+4) Watch console output while FTP transfers are running; JSON lines append to the log if set.
 """
 
 import argparse
